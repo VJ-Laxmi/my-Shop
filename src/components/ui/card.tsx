@@ -3,7 +3,8 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm", className)} {...props} />
+  // make card a column flex container and full height so footer can align to bottom
+  <div ref={ref} className={cn("rounded-lg border bg-card text-card-foreground shadow-sm flex flex-col h-full", className)} {...props} />
 ));
 Card.displayName = "Card";
 
@@ -29,7 +30,8 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
 CardDescription.displayName = "CardDescription";
 
 const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />,
+  // allow content to grow so footer stays pinned to the bottom
+  ({ className, ...props }, ref) => <div ref={ref} className={cn("p-6 pt-0 flex-1", className)} {...props} />,
 );
 CardContent.displayName = "CardContent";
 

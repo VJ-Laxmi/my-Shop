@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Session } from "@supabase/supabase-js";
 
 const Products = () => {
@@ -125,6 +126,7 @@ const Products = () => {
           </div>
         )}
       </div>
+      <Footer /> 
     </div>
   );
 };

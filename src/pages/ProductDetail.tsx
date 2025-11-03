@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Session } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { ShoppingCart, Minus, Plus } from "lucide-react";
@@ -201,6 +202,7 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

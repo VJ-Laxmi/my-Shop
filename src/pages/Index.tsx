@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Session } from "@supabase/supabase-js";
 
 const Index = () => {
@@ -28,8 +29,7 @@ const Index = () => {
       const { data, error } = await supabase
         .from("products")
         .select("*")
-        .eq("featured", true)
-        .limit(6);
+        .eq("featured", true);
 
       if (error) throw error;
       return data;
@@ -111,8 +111,10 @@ const Index = () => {
           </div>
         )}
       </section>
+
+      <Footer />
     </div>
   );
 };
-
+ 
 export default Index;
