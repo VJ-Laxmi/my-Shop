@@ -60,7 +60,7 @@ const Navbar = ({ session }: NavbarProps) => {
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
             <Package className="h-6 w-6" />
-            <span className="text-xl font-bold">ShopHub</span>
+            <span className="text-xl font-bold">ShopCart</span>
           </Link>
 
           <div className="flex items-center gap-4">

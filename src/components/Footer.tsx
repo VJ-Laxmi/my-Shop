@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="w-full lg:w-1/4">
               <Link to="/" className="inline-flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold">S</div>
-                <span className="text-xl font-semibold">ShopHub</span>
+                <span className="text-xl font-semibold">ShopCart</span>
               </Link>
               <p className="text-sm text-muted-foreground mt-4 max-w-xs">
                 Quality goods, honest prices. Curated collections and fast shipping.
@@ -42,7 +42,7 @@ export default function Footer() {
               <span className="sr-only">Region</span>
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg>
               <span>Croatia</span>
-              <span>© {new Date().getFullYear()} ShopHub. All Rights Reserved.</span>
+              <span>© {new Date().getFullYear()} ShopCart. All Rights Reserved.</span>
             </div>
             <div className="mt-3 md:mt-0 flex gap-6">
               <Link to="/#" className="hover:text-white">Guides</Link>

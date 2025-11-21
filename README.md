@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Welcome to my ecommerce project
 
 ## Project info
 
@@ -11,3 +11,4 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- Cloud Database

@@ -44,7 +44,7 @@ const Index = () => {
       <section className="container mx-auto px-4 py-16">
         <div className="text-center space-y-4">
           <h1 className="text-5xl font-bold tracking-tight">
-            Welcome to <span className="text-primary">ShopHub</span>
+            Welcome to <span className="text-primary">ShopCart</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Discover amazing products at unbeatable prices. Shop from our curated collection of high-quality items.
