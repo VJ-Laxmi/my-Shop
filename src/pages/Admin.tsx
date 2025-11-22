@@ -101,16 +101,26 @@ const Admin = () => {
   const { data: users = [] } = useQuery({
     queryKey: ["admin-users"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      // Fetch profiles
+      const { data: profiles, error: profilesError } = await supabase
         .from("profiles")
-        .select(`
-          *,
-          user_roles(role)
-        `)
+        .select("*")
         .order("created_at", { ascending: false });
 
-      if (error) throw error;
-      return data;
+      if (profilesError) throw profilesError;
+
+      // Fetch user roles
+      const { data: roles, error: rolesError } = await supabase
+        .from("user_roles")
+        .select("user_id, role");
+
+      if (rolesError) throw rolesError;
+
+      // Combine data
+      return profiles.map((profile) => ({
+        ...profile,
+        user_roles: roles.filter((role) => role.user_id === profile.user_id),
+      }));
     },
   });
 
