@@ -142,6 +142,39 @@ const Admin = () => {
     },
   });
 
+  const deleteUserMutation = useMutation({
+    mutationFn: async (userId: string) => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error("Not authenticated");
+
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/delete-user`,
+        {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${session.access_token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+        }
+      );
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to delete user");
+      }
+
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+      toast.success("User deleted successfully!");
+    },
+    onError: (error: any) => {
+      toast.error(error.message || "Failed to delete user");
+    },
+  });
+
   const saveProductMutation = useMutation({
     mutationFn: async () => {
       const productData = {
@@ -377,6 +410,11 @@ const Admin = () => {
                         <p className="text-sm text-muted-foreground">
                           Joined: {new Date(user.created_at).toLocaleDateString()}
                         </p>
+                        {user.last_login && (
+                          <p className="text-sm text-muted-foreground">
+                            Last login: {new Date(user.last_login).toLocaleDateString()} at {new Date(user.last_login).toLocaleTimeString()}
+                          </p>
+                        )}
                       </div>
                       <div className="flex items-center gap-4">
                         <Badge variant={user.user_roles?.[0]?.role === "admin" ? "default" : "secondary"}>
@@ -396,6 +434,18 @@ const Admin = () => {
                             <SelectItem value="admin">Admin</SelectItem>
                           </SelectContent>
                         </Select>
+                        <Button 
+                          variant="destructive" 
+                          size="icon"
+                          onClick={() => {
+                            if (confirm(`Are you sure you want to delete ${user.email}?`)) {
+                              deleteUserMutation.mutate(user.user_id);
+                            }
+                          }}
+                          disabled={deleteUserMutation.isPending}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
                       </div>
                     </div>
                   ))}

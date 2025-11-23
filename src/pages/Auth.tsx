@@ -37,7 +37,7 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: loginEmail,
       password: loginPassword,
     });
@@ -45,6 +45,13 @@ const Auth = () => {
     if (error) {
       toast.error(error.message);
     } else {
+      // Update last login time
+      if (data.user) {
+        await supabase
+          .from("profiles")
+          .update({ last_login: new Date().toISOString() })
+          .eq("user_id", data.user.id);
+      }
       toast.success("Logged in successfully!");
     }
 
